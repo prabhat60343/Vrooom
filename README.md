@@ -61,6 +61,58 @@
     }
     ```
 
+### Captain Registration
+- **URL:** `/captains/register`
+- **Method:** `POST`
+- **Body:**
+    ```json
+    {
+        "fullname": {
+            "firstname": "Jane",
+            "lastname": "Doe"
+        },
+        "email": "jane.doe@example.com",
+        "password": "password123",
+        "vehicle": {
+            "color": "red",
+            "plate": "ABC1234",
+            "capacity": 4,
+            "vehicleType": "car"
+        }
+    }
+    ```
+
+### Captain Login
+- **URL:** `/captains/login`
+- **Method:** `POST`
+- **Body:**
+    ```json
+    {
+        "email": "jane.doe@example.com",
+        "password": "password123"
+    }
+    ```
+
+### Get Captain Profile
+- **URL:** `/captains/profile`
+- **Method:** `GET`
+- **Headers:**
+    ```json
+    {
+        "Authorization": "Bearer <token>"
+    }
+    ```
+
+### Captain Logout
+- **URL:** `/captains/logout`
+- **Method:** `GET`
+- **Headers:**
+    ```json
+    {
+        "Authorization": "Bearer <token>"
+    }
+    ```
+
 ## License
 
 This project is licensed under the MIT License.
