@@ -1,11 +1,11 @@
-# Uber Clone Backend
+# Uber Clone
 
-## Setup
+## Backend Setup
 
 1. Clone the repository:
     ```sh
     git clone <repository-url>
-    cd Uber
+    cd Uber/Backend
     ```
 
 2. Install dependencies:
@@ -21,6 +21,23 @@
     ```
 
 4. Start the server:
+    ```sh
+    npm start
+    ```
+
+## Frontend Setup
+
+1. Navigate to the frontend directory:
+    ```sh
+    cd ../Frontend
+    ```
+
+2. Install dependencies:
+    ```sh
+    npm install
+    ```
+
+3. Start the frontend server:
     ```sh
     npm start
     ```
@@ -110,6 +127,19 @@
     ```json
     {
         "Authorization": "Bearer <token>"
+    }
+    ```
+
+## Blacklisting Tokens
+
+Tokens are blacklisted upon logout to prevent reuse.
+
+### Blacklist Token Model
+- **Schema:**
+    ```json
+    {
+        "token": "string",
+        "createdAt": "date"
     }
     ```
 
