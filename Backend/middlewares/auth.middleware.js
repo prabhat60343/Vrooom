@@ -9,7 +9,7 @@ module.exports.authUser = async (req, res, next) => {
 
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        const user = await userModel.findById(decoded._id)
+        const user = await userModel.findById(decoded._id);
 
         req.user = user;
 
@@ -18,7 +18,7 @@ module.exports.authUser = async (req, res, next) => {
     } catch (err) {
         return res.status(401).json({ message: 'Unauthorized' });
     }
-}
+};
 
 module.exports.authCaptain = async (req, res, next) => {
     const token = req.cookies.token || req.headers.authorization?.split(' ')[1];

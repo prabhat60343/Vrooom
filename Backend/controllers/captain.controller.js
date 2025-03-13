@@ -35,7 +35,7 @@ module.exports.registerCaptain = async (req, res, next) => {
 
     res.status(201).json({ token, captain });
 
-}
+};
 
 module.exports.loginCaptain = async (req, res, next) => {
     const errors = validationResult(req);
@@ -62,11 +62,11 @@ module.exports.loginCaptain = async (req, res, next) => {
     res.cookie('token', token);
 
     res.status(200).json({ token, captain });
-}
+};
 
 module.exports.getCaptainProfile = async (req, res, next) => {
-    res.status(200).json({ captain: req.captain })
-}
+    res.status(200).json({ captain: req.captain });
+};
 
 module.exports.logoutCaptain = async (req, res, next) => {
     const token = req.cookies.token || req.headers.authorization?.split(' ')[1];

@@ -6,19 +6,23 @@ const registerUser = async (req, res, next) => {
     try {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
+            console.log('Validation errors:', errors.array()); // Debugging information
             return res.status(400).json({
                 errors: errors.array(),
             });
         }
 
         const { firstName, lastName, email, password } = req.body;
-const isUserAlreadyExist = await userModel.findOne({email});
-if(isUserAlreadyExist){
-    return res.status(400).json({
-        message:'User already exists'
-    })
-}
+        console.log('Registering user with email:', email); // Debugging information
+        const isUserAlreadyExist = await userModel.findOne({ email });
+        if (isUserAlreadyExist) {
+            console.log('User already exists with email:', email); // Debugging information
+            return res.status(400).json({
+                message: 'User already exists'
+            });
+        }
         const hashedPassword = await userModel.hashPassword(password);
+        console.log('Password hashed successfully'); // Debugging information
         const user = await userService.createUser({
             firstName,
             lastName,
@@ -27,8 +31,10 @@ if(isUserAlreadyExist){
         });
 
         const token = user.generateAuthToken();
+        console.log('User registered successfully:', user); // Debugging information
         res.status(201).json({ token, user });
     } catch (error) {
+        console.error('Error during user registration:', error); // Debugging information
         next(error); // Pass errors to Express error handler
     }
 };
