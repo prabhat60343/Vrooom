@@ -1,36 +1,40 @@
 import React from 'react';
-import { Link,Navigate, useNavigate } from 'react-router-dom';
-import {useState,useContext} from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useState, useContext } from 'react';
 import { UserDataContext } from '../context/UserContext';
 import axios from 'axios';
 
-
-
 const UserLogin = () => {
-const [email,setEmail]=useState('')
-const [password,setPassword]=useState('')
-const [userData,setUserData]=useState({});
-const{user,setUser}=useContext(UserDataContext)
-const navigate=useNavigate()
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState(''); // Add error state
+  const { user, setUser } = useContext(UserDataContext);
+  const navigate = useNavigate();
 
-
-const  submitHandler=async(e)=>{
+  const submitHandler = async (e) => {
     e.preventDefault();
-    const userData={
-      email:email,
-      password:password
+    const userData = {
+      email: email,
+      password: password
+    };
+    try {
+      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/users/login`, userData);
+      if (response.status === 200) {
+        const data = response.data;
+        setUser(data.user);
+        localStorage.setItem('token', data.token);
+        navigate('/home');
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 400) {
+        setError('Invalid email or password'); // Set error message
+      } else {
+        setError('An error occurred. Please try again.');
+      }
     }
-    const response=await axios.post(`${import.meta.env.VITE_BASE_URL}/users/login`,userData)
-    if(response.status===200){
-      const data =response.data
-setUser(data.user)
-localStorage.setItem('token',data.token)
-    }
-    navigate('/home')
-    
-   setEmail('')
-   setPassword('')
-}
+    setEmail('');
+    setPassword('');
+  };
 
   return (
     <div className='p-7 h-screen flex flex-col justify-between'>
@@ -46,9 +50,7 @@ localStorage.setItem('token',data.token)
           <input
             required
             value={email}
-            onChange={(e)=>
-                setEmail(e.target.value)
-            }
+            onChange={(e) => setEmail(e.target.value)}
             className='bg-[#eeeeee] mb-7 rounded-lg px-4 py-2 border w-full text-lg placeholder:text-base'
             type="email"
             placeholder='email@example.com'
@@ -58,14 +60,13 @@ localStorage.setItem('token',data.token)
           <input
             required
             value={password}
-            onChange={(e)=>
-                setPassword(e.target.value)
-            
-        }
+            onChange={(e) => setPassword(e.target.value)}
             className='bg-[#eeeeee] mb-7 rounded-lg px-4 py-2 border w-full text-lg placeholder:text-base'
             type="password"
             placeholder='password'
           />
+
+          {error && <p className='text-red-500 mb-4'>{error}</p>} {/* Display error message */}
 
           <button
             className='bg-[#111] text-white font-semibold mb-3 rounded-lg px-4 py-2 w-full text-lg'
