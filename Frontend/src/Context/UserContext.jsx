@@ -1,6 +1,6 @@
-import React, { createContext, useState } from "react"; 
+import React, { createContext, useState } from "react";
 
-export const UserDataContext = createContext();  
+export const UserDataContext = createContext();
 import axios from 'axios'
 
 const UserContext = ({ children }) => {
@@ -13,7 +13,7 @@ const UserContext = ({ children }) => {
   });
 
   return (
-    <UserDataContext.Provider value={{ user, setUser }}> 
+    <UserDataContext.Provider value={{ user, setUser }}>
       {children}
     </UserDataContext.Provider>
   );

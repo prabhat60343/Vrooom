@@ -2,12 +2,12 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import {CaptainDataContext } from '../Context/CaptainContext'
+import { CaptainDataContext } from '../Context/CaptainContext'
 
 const CaptainLogin = () => {
 
-  const [ email, setEmail ] = useState('')
-  const [ password, setPassword ] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
   const { captain, setCaptain } = React.useContext(CaptainDataContext)
   const navigate = useNavigate()

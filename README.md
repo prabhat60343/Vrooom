@@ -42,6 +42,24 @@
     npm start
     ```
 
+### Confirm Ride Component
+
+The `ConfirmRide` component is responsible for displaying the ride confirmation panel in the frontend. It includes details such as pickup and drop-off locations, fare, and a confirmation button.
+
+#### Props
+- `setConfirmRidePanel` (function): A function to toggle the visibility of the confirmation panel.
+
+#### Usage
+The component can be used as follows:
+```jsx
+<ConfirmRide setConfirmRidePanel={setConfirmRidePanel} />
+```
+
+#### Features
+- Displays pickup and drop-off locations.
+- Shows the fare and payment method.
+- Includes a button to confirm the ride.
+
 ## Endpoints
 
 ### User Registration
